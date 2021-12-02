@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import { contract_address, contract_abi } from "./constants";
 import getWeb3 from "./getWeb3";
-import nftVideos from './exportVideos'
+import nftVideos from "./exportVideos";
 
 export default function App() {
- 
   const [contract, setcontract] = useState("");
   const [accounts, setaccounts] = useState();
   const [, setNftsJson] = useState([]);
@@ -97,7 +96,7 @@ export default function App() {
       const uriArray = await Promise.all(
         nftsId.map(async (id) => {
           let uri = await contract?.methods?.getURI(id).call();
-          const uriObj = {uri , id}
+          const uriObj = { uri, id };
           return uriObj;
         })
       );
@@ -107,7 +106,7 @@ export default function App() {
           uriArray.map(async (uri) => {
             let uriRes = await fetch(uri.uri);
             uriRes = await uriRes.json();
-            uriRes = { ...uriRes , uri : uri.uri  , id: uri.id};
+            uriRes = { ...uriRes, uri: uri.uri, id: uri.id };
             return uriRes;
           })
         );
@@ -156,7 +155,7 @@ export default function App() {
     if (nftsPrice < 1) {
       return;
     }
-     await contract.methods
+    await contract.methods
       .buyInBulk(selectedTypes)
       .send({ from: accounts[0], value: nftsPrice });
 
@@ -179,19 +178,18 @@ export default function App() {
   return (
     <div>
       <div className="elementor-widget-container">
-      
         {accounts && accounts.length ? (
           <div>
-          <div className="elementor-widget-container">
-          <div
-            className="
+            <div className="elementor-widget-container">
+              <div
+                className="
         qodef-shortcode qodef-m qodef-section-title
         qodef-alignment--center "
-            style={{ margin: "120px 0px" }}
-          >
-            <h1 className="qodef-m-title">Choose Bundles</h1>
-          </div>
-        </div>
+                style={{ margin: "120px 0px" }}
+              >
+                <h1 className="qodef-m-title">Choose Bundles</h1>
+              </div>
+            </div>
             <div style={{ textAlign: "center" }}>
               <section
                 className="
@@ -387,11 +385,15 @@ export default function App() {
                                 <video
                                   width="370"
                                   height="417"
-                                  src={nftVideos[`video${metaData.id}`]}
-                                  style={{ border: "1px solid" }}
                                   autoPlay
                                   loop
-                                />
+                                  muted
+                                >
+                                  <source
+                                    src={nftVideos[`video${metaData.id}`]}
+                                    type="video/mp4"
+                                  />
+                                </video>
                               </div>
                               <a href={metaData.uri}>
                                 {" "}
@@ -418,7 +420,11 @@ export default function App() {
         ) : (
           <div
             className="elementor-widget-container"
-            style={{ marginBottom: "300px" , marginTop : "200px", textAlign: "center" }}
+            style={{
+              marginBottom: "300px",
+              marginTop: "200px",
+              textAlign: "center",
+            }}
           >
             <input
               onClick={connectToMetamask}
