@@ -12,18 +12,18 @@ export default function App() {
   const [Loading, setLoading] = useState(false);
   const [packages, setPackages] = useState([
     {
-      name: "Genesis",
-      price: "0.75BNB",
+      name: "Rare",
+      price: "0.12BNB",
+      totalSupply: 53,
       remainingSupply: 0,
-      totalSupply: 9,
-      imgSrc: "https://hypeculture.net/storage/2021/10/genesis-1-614x1024.png",
-      srcSet: `
-    https://hypeculture.net/storage/2021/10/genesis-1-614x1024.png  614w,
-    https://hypeculture.net/storage/2021/10/genesis-1-180x300.png   180w,
-    https://hypeculture.net/storage/2021/10/genesis-1-768x1280.png  768w,
-    https://hypeculture.net/storage/2021/10/genesis-1-922x1536.png  922w,
-    https://hypeculture.net/storage/2021/10/genesis-1-600x1000.png  600w,
-    https://hypeculture.net/storage/2021/10/genesis-1.png          1200w
+      imgSrc: "https://hypeculture.net/storage/2021/10/rare-1-614x1024.png",
+      srcSet: `  
+     https://hypeculture.net/storage/2021/10/rare-1-614x1024.png  614w,
+    https://hypeculture.net/storage/2021/10/rare-1-180x300.png   180w,
+    https://hypeculture.net/storage/2021/10/rare-1-768x1280.png  768w,
+    https://hypeculture.net/storage/2021/10/rare-1-922x1536.png  922w,
+    https://hypeculture.net/storage/2021/10/rare-1-600x1000.png  600w,
+    https://hypeculture.net/storage/2021/10/rare-1.png          1200w
   `,
     },
     {
@@ -59,18 +59,18 @@ export default function App() {
   `,
     },
     {
-      name: "Rare",
-      price: "0.12BNB",
-      totalSupply: 53,
+      name: "Genesis",
+      price: "0.75BNB",
       remainingSupply: 0,
-      imgSrc: "https://hypeculture.net/storage/2021/10/rare-1-614x1024.png",
-      srcSet: `  
-     https://hypeculture.net/storage/2021/10/rare-1-614x1024.png  614w,
-    https://hypeculture.net/storage/2021/10/rare-1-180x300.png   180w,
-    https://hypeculture.net/storage/2021/10/rare-1-768x1280.png  768w,
-    https://hypeculture.net/storage/2021/10/rare-1-922x1536.png  922w,
-    https://hypeculture.net/storage/2021/10/rare-1-600x1000.png  600w,
-    https://hypeculture.net/storage/2021/10/rare-1.png          1200w
+      totalSupply: 9,
+      imgSrc: "https://hypeculture.net/storage/2021/10/genesis-1-614x1024.png",
+      srcSet: `
+    https://hypeculture.net/storage/2021/10/genesis-1-614x1024.png  614w,
+    https://hypeculture.net/storage/2021/10/genesis-1-180x300.png   180w,
+    https://hypeculture.net/storage/2021/10/genesis-1-768x1280.png  768w,
+    https://hypeculture.net/storage/2021/10/genesis-1-922x1536.png  922w,
+    https://hypeculture.net/storage/2021/10/genesis-1-600x1000.png  600w,
+    https://hypeculture.net/storage/2021/10/genesis-1.png          1200w
   `,
     },
   ]);
