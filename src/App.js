@@ -3,13 +3,16 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { contract_address, contract_abi } from "./constants";
 import getWeb3 from "./getWeb3";
 import nftVideos from "./exportVideos";
-
+import OwnerSection from './Owner'
 export default function App() {
   const [contract, setcontract] = useState("");
   const [accounts, setaccounts] = useState();
+  const [isOwner, setisOwner] = useState(false);
   const [, setNftsJson] = useState([]);
   const [nftMetadata, setnftMetadata] = useState([]);
   const [Loading, setLoading] = useState(false);
+  const [giftTokenId, setgiftTokenId] = useState();
+  const [influencerAddress, setinfluencerAddress] = useState("");
   const [packages, setPackages] = useState([
     {
       name: "Rare",
@@ -86,6 +89,13 @@ export default function App() {
     setcontract(instance);
     setaccounts(accounts);
     instance && accounts && getNftsByAddress(instance, accounts);
+
+    //check is owner
+    let owner = await instance.methods.owner().call();
+    if(owner == accounts[0]){
+      setisOwner(true)
+    }
+
   };
 
   const getNftsByAddress = async (contract, accounts) => {
@@ -162,6 +172,20 @@ export default function App() {
     setLoading(true);
     getNftsByAddress(contract, accounts);
   };
+
+  const sendNftsToInfluencer = async () => {
+    let owner = await contract.methods
+    .ownerOfNft(giftTokenId)
+    .call();
+
+    if(owner !== accounts[0]){
+      alert("You are not owner of this NFT or you already sent this to influencer.")
+    }else{
+      await contract.methods
+      .sentToInfluencers(giftTokenId , influencerAddress)
+      .send({ from: accounts[0] });
+    }
+  }
 
   const selectPackage = (name) => {
     if (selectedTypes.includes(name)) {
@@ -395,13 +419,10 @@ export default function App() {
                                   />
                                 </video>
                               </div>
-                              <a href={metaData.uri}>
+                              <h6 className="qodef-m-title">
                                 {" "}
-                                <h6 className="qodef-m-title">
-                                  {" "}
-                                  {metaData.name}{" "}
-                                </h6>{" "}
-                              </a>
+                                {metaData.name}{" "}
+                              </h6>{" "}
                             </div>
                           </div>
                         </div>
@@ -415,7 +436,32 @@ export default function App() {
                   )}
                 </div>
               </section>
+
+            {isOwner ?  <section
+              className="
+      elementor-section
+      elementor-top-section
+      elementor-element
+      elementor-element-705fef1
+      qodef-elementor-content-grid
+      elementor-section-full_width
+      elementor-section-content-middle
+      elementor-section-height-default
+      elementor-section-height-default
+    "
+              data-id="705fef1"
+              data-element_type="section"
+            >
+            <h1> Gift To Influencers </h1>
+              <div className="elementor-widget-container">
+              <OwnerSection giftTokenId = {giftTokenId}  setgiftTokenId={setgiftTokenId} 
+              influencerAddress={influencerAddress} setinfluencerAddress={setinfluencerAddress}
+              sendNftsToInfluencer={sendNftsToInfluencer}
+              />
+              </div>
+              </section> : ""}
             </div>
+            
           </div>
         ) : (
           <div
