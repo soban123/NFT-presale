@@ -94,6 +94,8 @@ export default function App() {
     let owner = await instance.methods.owner().call();
     if(owner == accounts[0]){
       setisOwner(true)
+    }else{
+      setisOwner(false)
     }
 
   };
