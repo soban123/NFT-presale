@@ -423,7 +423,7 @@ export default function App() {
                               </div>
                               <h6 className="qodef-m-title">
                                 {" "}
-                                {metaData.name}{" "}
+                                {metaData.name}{" "} {isOwner ? `(${metaData.id})` : "" }
                               </h6>{" "}
                             </div>
                           </div>
